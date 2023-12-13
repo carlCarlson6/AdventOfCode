@@ -10,7 +10,8 @@
     "day4":   "ts-node ./day4/index.ts",
     "day5":   "ts-node ./day5/index.ts",
     "day11":  "ts-node ./day11/index.ts",
-    "day12":  "ts-node ./day12/index.ts"
+    "day12":  "ts-node ./day12/index.ts",
+    "day13":  "ts-node ./day13/index.ts"
   },
   "author": "",
   "license": "ISC",
