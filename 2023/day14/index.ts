@@ -1,4 +1,4 @@
-const day = 16;
+const day = 14;
 
 console.log(`DAY ${day}`);
 console.log("------------------------");
