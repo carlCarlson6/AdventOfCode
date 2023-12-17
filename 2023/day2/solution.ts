@@ -1,25 +1,10 @@
-import { readDataLines, validateSample } from "../common";
-
 const limits = {
   blue: 14,
   red: 12,
   green: 13
 }
 
-export const day2 = () => {
-  console.log("DAY 2");
-  console.log("------------------------");
-  
-  validateSample(solvePart1(readDataLines(2, 'sample1')), 8);
-  const part1solution = solvePart1(readDataLines(2, 'full'));
-  console.log("solution for part 1 is", part1solution, "is ok?", 2776 === part1solution);
-
-  validateSample(solvePart2(readDataLines(2, 'sample1')), 2286);
-  const part2solution = solvePart2(readDataLines(2, 'full'));
-  console.log("solution for part 2 is", part2solution, "is ok?", 68638 === part2solution);
-}
-
-const solvePart1 = (data: string[]) => {
+export const solvePart1 = (data: string[]) => {
   const maxGames = getMaxGames(data);
   let score = 0;
   for (let idx = 0; idx < maxGames.length; idx++) {
@@ -29,7 +14,7 @@ const solvePart1 = (data: string[]) => {
   return score;
 }
 
-const solvePart2 = (data: string[]) => getMaxGames(data)
+export const solvePart2 = (data: string[]) => getMaxGames(data)
   .map(x => x.blue * x.green * x.red)
   .reduce((x, y) => x + y)
 

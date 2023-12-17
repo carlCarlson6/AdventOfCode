@@ -12,20 +12,7 @@ const numbers = [
   { asInt: 9, asStr: 'nine'  },
 ]
 
-export const day1 = () => {
-  console.log("DAY 1");
-  console.log("------------------------");
-
-  validateSample(solvePart1(readDataLines(1, 'sample1')), 142);
-  const firstPartSolution = solvePart1(readDataLines(1, 'full'));
-  console.log("solution for part 1 is", firstPartSolution, "is ok?", 55130 === firstPartSolution);
-
-  validateSample(solvePart2(readDataLines(1, 'sample2')), 281);
-  const secondPartSolution = solvePart2(readDataLines(1, 'full'));
-  console.log("solution for part 2 is", secondPartSolution, "is ok?", 54985 === secondPartSolution);
-}
-
-const solvePart1 = (lines: string[]) => sumValues(lines
+export const solvePart1 = (lines: string[]) => sumValues(lines
   .map(line => {
     const values: number[] = [];
     for (const character of line.split('')) {
@@ -35,7 +22,7 @@ const solvePart1 = (lines: string[]) => sumValues(lines
     return values;
   }))
 
-const solvePart2 = (lines: string[]) => sumValues(lines
+export  const solvePart2 = (lines: string[]) => sumValues(lines
   .map(line => {
     const values: number[] = [];
     for (let index = 0; index < line.length; index++) {

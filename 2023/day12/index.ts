@@ -6,7 +6,7 @@ import {solveProblemPart2} from "./solveProblemPart2";
 
 const day = 12;
 
-console.log("DAY 11");
+console.log("DAY 12");
 console.log("------------------------");
 
 console.log("sample part 1");
