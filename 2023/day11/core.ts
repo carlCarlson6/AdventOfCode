@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import {transposeMatrix} from "../common";
 
 type Galaxy = {
 	id: string;
@@ -65,8 +66,6 @@ const getAllGalaxyPairs = (galaxies: Galaxy[]): [Galaxy, Galaxy][] => {
 }
 
 const calculateShorPath = (a: Galaxy, b: Galaxy): number => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
-
-const transposeMatrix = <T>(matrix: T[][]) => matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
 
 export const solveProblem = (data: string[], expansionFactor: number) => {
 	const initialGalaxiesMap = parseGalaxyMap(data);

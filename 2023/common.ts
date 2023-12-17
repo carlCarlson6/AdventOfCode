@@ -15,4 +15,7 @@ export const arrayEqual = <T>(a: T[], b: T[]) =>
   Array.isArray(a) &&
 	Array.isArray(b) &&
 	a.length === b.length &&
-	a.every((val, index) => val === b[index])
+	a.every((val, index) => val === b[index]);
+
+export const transposeMatrix = <T>(matrix: T[][]) =>
+  matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));

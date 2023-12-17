@@ -1,4 +1,5 @@
-import {Pattern, Patterns} from "./core";
+import {parsePatternSymbols, Pattern, Patterns} from "./core";
+import {arrayEqual, transposeMatrix} from "../common";
 
 export const solveProblemPart1 = (data: string[]) => {
 	const patterns = parsePatterns(data);
@@ -14,7 +15,19 @@ export const solveProblemPart1 = (data: string[]) => {
 }
 
 const parsePatterns = (data: string[]): Patterns => {
-	throw new Error("not implemented");
+	const patterns: Patterns = [];
+	let pattern: Pattern = [];
+	for (const line of data) {
+		if (line === "") {
+			patterns.push(pattern);
+			pattern = [];
+			continue;
+		}
+		pattern.push(line.split("").map(x => parsePatternSymbols(x)))
+	}
+	if (pattern.length !== 0)
+		patterns.push(pattern);
+	return patterns
 }
 
 const findHorizontalReflections = (patterns: Patterns): {
@@ -43,7 +56,22 @@ const findHorizontalReflection = (pattern: Pattern): {
 	thereIsPattern: boolean,
 	numberRowsAbove: number
 } => {
-	throw new Error("not implemented");
+	const transposedPattern = transposeMatrix(pattern);
+	let count = 0;
+	for(let i = 0; i < transposedPattern.length; i++) {
+		const left = transposedPattern[i];
+		if (i+1 >= transposedPattern.length) break;
+		const right = transposedPattern[i+1];
+		if (arrayEqual(left, right)) {
+			count = i+1;
+			break;
+		}
+	}
+
+	return {
+		thereIsPattern: count > 0,
+		numberRowsAbove: count,
+	}
 }
 
 const findVerticalReflections = (patterns: Patterns): {
