@@ -2,7 +2,7 @@ import {ContraptionMap, ContraptionTileSymbol, EnergizedTiles} from "./types";
 
 export const runContraption = (
 	map: ContraptionMap,
-	{initialPosition, initialDirection}: {initialPosition: {x: number, y: number}, initialDirection: {x: number, y: number}}
+	{position: initialPosition, direction: initialDirection}: {position: {x: number, y: number}, direction: {x: number, y: number}}
 	): {
 	tiles: EnergizedTiles,
 	newBeams: {position: {x: number, y: number}, direction: {x: number, y: number}}[]
@@ -69,6 +69,7 @@ const applyDotSymbol = (
 	}]
 })
 
+// this is the / mirror
 const applyMirrorDownUp = (
 	position: {x: number, y: number},
 	direction: {x: number, y: number},
@@ -81,6 +82,7 @@ const applyMirrorDownUp = (
 	throw new Error("invalid movement case")
 }
 
+// this is the \ mirror
 const applyMirrorUpDown = (
 	position: {x: number, y: number},
 	direction: {x: number, y: number},
@@ -102,7 +104,41 @@ const applyVerticalSplit = (
 		direction: {x: number, y: number},
 	}[]
 } => {
-	throw new Error("invalid movement case")
+	if ((direction.x === 1 && direction.y === 0) || (direction.x === -1 && direction.y === 0)) {
+		return {
+			beams: [
+				{
+					direction: {
+						x: 0,
+						y: 1,
+					},
+					position: {
+						x: position.x,
+						y: position.y - 1
+					}
+				},
+				{
+					direction: {
+						x: 0,
+						y: -1,
+					},
+					position: {
+						x: position.x,
+						y: position.y + 1
+					}
+				}
+			]
+		}
+	}
+	return {
+		beams: [{
+			direction,
+			position: {
+				x: position.x + direction.x,
+				y: position.y + direction.y
+			}
+		}]
+	}
 }
 
 const applyHorizontalSplit = (
