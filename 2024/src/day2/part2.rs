@@ -1,4 +1,4 @@
-use std::{fs, ops::Index};
+use std::fs;
 
 use super::{parse_input::parse_problem_input, part1::is_report_safe};
 
