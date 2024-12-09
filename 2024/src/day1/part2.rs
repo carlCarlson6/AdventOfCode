@@ -2,8 +2,8 @@ use std::{fs, vec};
 
 use super::parse_input;
 
-pub fn execute_example_part2() {
-  println!("executing example PART2");
+pub fn run_example() {
+  println!("executing example PART 2");
   let read_example_input = fs::read_to_string("./src/day1/example_input_part_1.txt");
   match read_example_input {
 		Ok(example_input_part1) => { 
@@ -17,8 +17,8 @@ pub fn execute_example_part2() {
 	}
 }
 
-pub fn execute_complete_part2() {
-  println!("executing complete PART2");
+pub fn run_complete() {
+  println!("executing complete PART 2");
 	let read_complete_input_part1 = fs::read_to_string("./src/day1/input_part_1.txt");
 	match read_complete_input_part1 {
 		Ok(complete_input_part1) => { 
