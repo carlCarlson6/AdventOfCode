@@ -35,11 +35,11 @@ pub fn run_complete() {
 fn execute_part1(input: String) -> i32 {
   parse_problem_input(input)
     .iter()
-    .filter(|level| is_report_safe(level.to_vec()))
+    .filter(|level| is_report_safe(level))
     .count() as i32
 }
 
-pub fn is_report_safe(levels: Vec<i32>) -> bool {
+pub fn is_report_safe(levels: &Vec<i32>) -> bool {
   let is_safe= 
   (is_increasing(levels.clone()) 
   || is_decreasing(levels.clone()))

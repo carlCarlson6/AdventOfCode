@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, ops::Index};
 
 use super::{parse_input::parse_problem_input, part1::is_report_safe};
 
@@ -23,7 +23,7 @@ pub fn run_complete() {
   match read_input {
 		Ok(example_input_part1) => { 
 			let result = execute_part2(example_input_part1);
-      println!("result is [{}]", result);
+      println!("result is [{}]", result); // 293
 		},
 		Err(reading_file_error) => {
 			println!("bad ): - {}", reading_file_error.to_string());
@@ -35,14 +35,22 @@ pub fn run_complete() {
 fn execute_part2(input: String) -> i32 {
   parse_problem_input(input)
     .iter()
-    .filter(|level| is_report_tolerable(level.to_vec()))
+    .filter(|level| is_report_tolerable(level))
     .count() as i32
 }
 
-fn is_report_tolerable(levels: Vec<i32>) -> bool {
+fn is_report_tolerable(levels: &Vec<i32>) -> bool {
 	if is_report_safe(levels) {
 		true
 	} else {
+		for index in 0..levels.len() {
+			let mut without_one_level = levels.clone();
+			without_one_level.remove(index);
+			let is_safe = is_report_safe(&without_one_level);
+			if is_safe {
+				return true;
+			}
+		}
 		false
 	}
 }
