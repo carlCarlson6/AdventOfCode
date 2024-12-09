@@ -43,6 +43,7 @@ fn execute_part1(input: String) -> i32 {
 
 	let mut absolute_differences = vec![];
 	for idx in 0..left_numbers.len() {
+		println!("{}", idx);
 		let left_number = left_numbers[idx];
 		let right_number = right_numbers[idx];
 		absolute_differences.push((left_number-right_number).abs());
