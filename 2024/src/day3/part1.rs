@@ -5,7 +5,7 @@ use regex::Regex;
 
 pub fn run_example() {
   println!("executing example PART 1");
-  match fs::read_to_string("./src/day3/example_input.txt") {
+  match fs::read_to_string("./src/day3/example_input_part1.txt") {
     Ok(input) => { 
 			let result = execute_part1(input);
 			println!("result should be 161 -> {} | {}", result, result == 161)
@@ -19,7 +19,7 @@ pub fn run_example() {
 
 pub fn run_complete() {
   println!("executing complete PART 1");
-  match fs::read_to_string("./src/day3/input.txt") {
+  match fs::read_to_string("./src/day3/input_part1.txt") {
 		Ok(example_input_part1) => { 
 			let result = execute_part1(example_input_part1);
 			println!("result is [{}]", result); // 174103751
