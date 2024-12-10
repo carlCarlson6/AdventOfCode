@@ -33,23 +33,28 @@ pub fn run_complete() {
 
 fn execute_part1(input: String) -> i32 {
   let multiplier_regex = Regex::new(r"mul\(\d+,\d+\)").unwrap();
-  let number_regex = Regex::new(r"\d+").unwrap();
   let mut multiplications = vec![];
       
   for multiplier_capture in multiplier_regex.find_iter(input.as_str()) {
-    let mut to_multiply = vec![];
-
-    for number_capture in number_regex.find_iter(multiplier_capture.as_str()) {
-      to_multiply.push(
-        number_capture
-          .as_str()
-          .parse::<i32>()
-          .map_or(0, |num|num)
-      );
-    }
-
-    multiplications.push(to_multiply.iter().product());
+    let multiplication_result = apply_mult_instruction(multiplier_capture.as_str());
+    multiplications.push(multiplication_result);
   }
 
   multiplications.iter().sum()
+}
+
+pub fn apply_mult_instruction(instruction: &str) -> i32 {
+  let number_regex = Regex::new(r"\d+").unwrap();
+  let mut to_multiply = vec![];
+
+  for number_capture in number_regex.find_iter(instruction) {
+    to_multiply.push(
+      number_capture
+        .as_str()
+        .parse::<i32>()
+        .map_or(0, |num|num)
+    );
+  }
+
+  to_multiply.iter().product()
 }
