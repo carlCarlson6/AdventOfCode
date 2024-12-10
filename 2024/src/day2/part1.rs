@@ -4,8 +4,7 @@ use super::parse_input::parse_problem_input;
 
 pub fn run_example() {
   println!("executing example PART 1");
-  let read_example_input = fs::read_to_string("./src/day2/example_input.txt");
-  match read_example_input {
+  match fs::read_to_string("./src/day2/example_input.txt") {
 		Ok(example_input_part1) => { 
 			let result = execute_part1(example_input_part1);
 			println!("result should be 2 -> {} | {}", result, result == 2)
@@ -18,7 +17,7 @@ pub fn run_example() {
 }
 
 pub fn run_complete() {
-  println!("executing complete PART 2");
+  println!("executing complete PART 1");
   let read_input = fs::read_to_string("./src/day2/input.txt");
   match read_input {
 		Ok(example_input_part1) => { 

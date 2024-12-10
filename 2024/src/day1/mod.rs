@@ -2,7 +2,7 @@ pub mod parse_input;
 pub mod par1;
 pub mod part2;
 
-pub fn run_day1() {
+pub fn run() {
 	println!("day 1");
 	par1::run_example();
 	par1::run_complete();
