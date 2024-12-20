@@ -47,7 +47,9 @@ pub fn is_report_safe(levels: &Vec<i32>) -> bool {
 }
 
 fn is_increasing(levels: Vec<i32>) -> bool {
-  levels.windows(2).all(|window| window[0] < window[1])
+  levels.windows(2).all(|window| {
+    window[0] < window[1]
+  })
 }
 
 fn is_decreasing(levels: Vec<i32>) -> bool {
