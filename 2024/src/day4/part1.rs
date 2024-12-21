@@ -30,6 +30,7 @@ pub fn run_complete() {
 }
 
 fn execute_part1(input: String) -> i32 {
+  // performance can be improved using a matrix
   let letters = read_letters(input);
   letters
     .iter()
@@ -41,7 +42,7 @@ fn execute_part1(input: String) -> i32 {
     )
 }
 
-fn read_letters(input: String) -> Vec<Letter> {
+pub fn read_letters(input: String) -> Vec<Letter> {
   let binding = input
     .split("\n")
     .collect::<Vec<&str>>();
@@ -75,6 +76,7 @@ fn process_letter(
 
   let mut total_matches = 0;
 
+  // TODO this can be a reduce func
   for direction in Directions::iter() {
     let m_letter = letters
       .iter()
@@ -101,7 +103,7 @@ fn process_letter(
   total_matches
 }
 
-fn move_in_direction(direction: &Directions, position: (i32, i32), multiplier: i32) -> (i32, i32) {
+pub fn move_in_direction(direction: &Directions, position: (i32, i32), multiplier: i32) -> (i32, i32) {
   let movement_vector = match direction {
     Directions::Up        => (0 * multiplier,  1 * multiplier),
     Directions::Down      => (0 * multiplier,  -1 * multiplier),
@@ -119,13 +121,13 @@ fn move_in_direction(direction: &Directions, position: (i32, i32), multiplier: i
 }
 
 #[derive(Clone)]
-struct Letter {
-  position: (i32, i32),
-  value: char,
+pub struct Letter {
+  pub position: (i32, i32),
+  pub value: char,
 }
 
 #[derive(Debug, EnumIter)]
-enum Directions {
+pub enum Directions {
   Up,
   Down,
   Right,
