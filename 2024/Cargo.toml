@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 regex = "1.11.1"
+strum = { version = "0.26.3", features = ["derive"] }
