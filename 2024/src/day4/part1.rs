@@ -1,5 +1,7 @@
 use std::fs;
-use strum::{EnumIter, IntoEnumIterator};
+use strum::IntoEnumIterator;
+
+use super::types::{Directions, Letter};
 
 pub fn run_example() {
   println!("executing example PART 1");
@@ -74,66 +76,26 @@ fn process_letter(
     return 0;
   }
 
-  let mut total_matches = 0;
+  Directions::iter()
+    .fold(0, |total, direction| {
+      let m_letter = letters
+        .iter()
+        .find(|letter| direction.move_in_direction(current_letter.position, 1) == letter.position)
+        .is_some_and(|letter| letter.value == 'M');
+      let a_letter = letters
+        .iter()
+        .find(|letter| direction.move_in_direction(current_letter.position, 2) == letter.position)
+        .is_some_and(|letter| letter.value == 'A');
+      let s_letter = letters
+        .iter()
+        .find(|letter| direction.move_in_direction(current_letter.position, 3) == letter.position)
+        .is_some_and(|letter| letter.value == 'S');
 
-  // TODO this can be a reduce func
-  for direction in Directions::iter() {
-    let m_letter = letters
-      .iter()
-      .find(|letter| move_in_direction(&direction, current_letter.position, 1) == letter.position)
-      .is_some_and(|letter| letter.value == 'M');
-    let a_letter = letters
-      .iter()
-      .find(|letter| move_in_direction(&direction, current_letter.position, 2) == letter.position)
-      .is_some_and(|letter| letter.value == 'A');
-    let s_letter = letters
-      .iter()
-      .find(|letter| move_in_direction(&direction, current_letter.position, 3) == letter.position)
-      .is_some_and(|letter| letter.value == 'S');
-
-    let is_match = m_letter & a_letter & s_letter;
-    total_matches = if is_match {
-      total_matches +1
-    } else {
-      total_matches
-    }
-
-  }
-
-  total_matches
-}
-
-pub fn move_in_direction(direction: &Directions, position: (i32, i32), multiplier: i32) -> (i32, i32) {
-  let movement_vector = match direction {
-    Directions::Up        => (0 * multiplier,  1 * multiplier),
-    Directions::Down      => (0 * multiplier,  -1 * multiplier),
-    Directions::Right     => (1 * multiplier,  0 * multiplier),
-    Directions::Left      => (-1 * multiplier, 0 * multiplier),
-    Directions::UpRight   => (1 * multiplier,  1 * multiplier),
-    Directions::UpLeft    => (-1 * multiplier,  1 * multiplier),
-    Directions::DownRight => (1 * multiplier,  -1 * multiplier),
-    Directions::DownLeft  => (-1 * multiplier,  -1 * multiplier),
-  };
-  (
-    movement_vector.0 + position.0,
-    movement_vector.1 + position.1
-  )
-}
-
-#[derive(Clone)]
-pub struct Letter {
-  pub position: (i32, i32),
-  pub value: char,
-}
-
-#[derive(Debug, EnumIter)]
-pub enum Directions {
-  Up,
-  Down,
-  Right,
-  Left,
-  UpRight,
-  UpLeft,
-  DownRight,
-  DownLeft
+      let is_match = m_letter & a_letter & s_letter;
+      if is_match {
+        total +1
+      } else {
+        total
+      }
+    })
 }

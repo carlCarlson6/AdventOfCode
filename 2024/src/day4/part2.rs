@@ -1,6 +1,7 @@
 use std::{char, fs};
 
-use super::part1::{move_in_direction, Directions, Letter, read_letters};
+use super::part1::read_letters;
+use super::types::{Letter, Directions};
 
 pub fn run_example() {
   println!("executing example PART 2");
@@ -55,12 +56,12 @@ fn process_letter(
     let upper_s_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::UpLeft, current_letter.position, 1) == letter.position)
+        Directions::UpLeft.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'S');
     let down_m_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::DownRight, current_letter.position, 1) == letter.position)
+        Directions::DownRight.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'M');
   
     (upper_m_letter & down_s_letter) || (upper_s_letter & down_m_letter)
@@ -70,22 +71,22 @@ fn process_letter(
     let upper_m_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::DownLeft, current_letter.position, 1) == letter.position)
+        Directions::DownLeft.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'M');
     let down_s_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::UpRight, current_letter.position, 1) == letter.position)
+        Directions::UpRight.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'S');
     let upper_s_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::DownLeft, current_letter.position, 1) == letter.position)
+        Directions::DownLeft.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'S');
     let down_m_letter = letters
       .iter()
       .find(|letter| 
-        move_in_direction(&Directions::UpRight, current_letter.position, 1) == letter.position)
+        Directions::UpRight.move_in_direction(current_letter.position, 1) == letter.position)
       .is_some_and(|letter| letter.value == 'M');
 
     (upper_m_letter & down_s_letter) || (upper_s_letter & down_m_letter)
@@ -101,6 +102,6 @@ fn is_adjacent_letter_match(direction: &Directions, position: (i32, i32), charac
   letters
     .iter()
     .find(|letter| 
-      move_in_direction(direction, position, 1) == letter.position)
+      direction.move_in_direction(position, 1) == letter.position)
     .is_some_and(|letter| letter.value == charact)
 }
