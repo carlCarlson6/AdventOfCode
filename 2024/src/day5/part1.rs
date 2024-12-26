@@ -41,12 +41,12 @@ fn execute_part1(input: String) -> i32 {
     .sum()
 }
 
-struct PrintingInfo {
-  ordering_rules: Vec<(i32,i32)>,
-  pages_updates: Vec<Vec<i32>>,
+pub struct PrintingInfo {
+  pub ordering_rules: Vec<(i32,i32)>,
+  pub pages_updates: Vec<Vec<i32>>,
 }
 
-fn parse_input(input: String) -> PrintingInfo {
+pub fn parse_input(input: String) -> PrintingInfo {
   input
     .split('\n')
     .fold(PrintingInfo {
@@ -87,7 +87,7 @@ fn parse_input(input: String) -> PrintingInfo {
     })
 }
 
-fn matches_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> bool {
+pub fn matches_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> bool {
   ordering_rules 
     .into_iter()
     .filter(|ordering_rule|
@@ -100,6 +100,6 @@ fn matches_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> bool
     })
 }
 
-fn get_central_value(matching_page_update: Vec<i32>) -> i32 {
+pub fn get_central_value(matching_page_update: Vec<i32>) -> i32 {
   matching_page_update[matching_page_update.len() / 2]
 }
