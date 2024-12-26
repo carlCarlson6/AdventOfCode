@@ -16,11 +16,6 @@ pub fn run_example() {
 
 fn execute_part1(input: String) -> i32 {
   let printing_info = parse_input(input);
-
-  let asd = printing_info.ordering_rules
-    .into_iter()
-    .group_by(|rule| rule.);
-
   printing_info
     .pages_updates
     .iter()
@@ -80,29 +75,16 @@ fn parse_input(input: String) -> PrintingInfo {
 fn matches_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> bool {
   ordering_rules 
     .into_iter()
+    .filter(|ordering_rule|
+      page_updates.contains(&ordering_rule.0) & page_updates.contains(&ordering_rule.1)
+    )
     .all(|ordering_rule| {
-      false
+      let left_index = page_updates.iter().position(|page_update| *page_update == ordering_rule.0);
+      let right_index = page_updates.iter().position(|page_update| *page_update == ordering_rule.1);
+      left_index < right_index
     })
-
-  /*page_updates
-    .into_iter()
-    .all(|page_update| {
-        let mut rules_to_apply = ordering_rules
-        .iter()
-        .filter(|rule| rule.0 == page_update);
-      rules_to_apply.all(|rule_to_apply| {
-        let left_index = {
-          
-
-          0
-        };
-        let right_index = 1;
-        left_index < right_index
-      })  
-    })*/
 }
 
-// &[i32]
 fn get_central_value(matching_page_update: Vec<i32>) -> i32 {
-  matching_page_update[matching_page_update.len().div_ceil(2)]
+  matching_page_update[matching_page_update.len() / 2]
 }
