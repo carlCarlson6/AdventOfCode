@@ -46,6 +46,6 @@ fn execute_part2(input: String) -> i32 {
     .sum()
 }
 
-fn apply_ordering_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> Vec<i32> {
+fn apply_ordering_rules(_page_updates: Vec<i32>, _ordering_rules: Vec<(i32,i32)>) -> Vec<i32> {
   todo!()
 }

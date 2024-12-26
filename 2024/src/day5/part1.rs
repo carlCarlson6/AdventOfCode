@@ -94,9 +94,16 @@ pub fn matches_rules(page_updates: Vec<i32>, ordering_rules: Vec<(i32,i32)>) -> 
       page_updates.contains(&ordering_rule.0) & page_updates.contains(&ordering_rule.1)
     )
     .all(|ordering_rule| {
-      let left_index = page_updates.iter().position(|page_update| *page_update == ordering_rule.0);
-      let right_index = page_updates.iter().position(|page_update| *page_update == ordering_rule.1);
-      left_index < right_index
+      let matches_rule = {
+        let left_index = page_updates
+          .iter()
+          .position(|page_update| *page_update == ordering_rule.0);
+        let right_index = page_updates
+          .iter()
+          .position(|page_update| *page_update == ordering_rule.1);
+        left_index < right_index
+      };
+      matches_rule
     })
 }
 
