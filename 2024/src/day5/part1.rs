@@ -14,6 +14,21 @@ pub fn run_example() {
   }
 }
 
+pub fn run_complete() {
+  println!("executing complete PART 1");
+  match fs::read_to_string("./src/day5/complete_input_part1.txt") {
+    Ok(input) => { 
+			let result = execute_part1(input);
+			println!("result is [{}]", result); // 6384
+		},
+		Err(reading_file_error) => {
+			println!("bad ): - {}", reading_file_error.to_string());
+			panic!("PANIC");
+		}
+  } 
+}
+
+
 fn execute_part1(input: String) -> i32 {
   let printing_info = parse_input(input);
   printing_info
