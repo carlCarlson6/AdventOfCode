@@ -28,7 +28,6 @@ pub fn run_complete() {
   } 
 }
 
-
 fn execute_part1(input: String) -> i32 {
   let printing_info = parse_input(input);
   printing_info
